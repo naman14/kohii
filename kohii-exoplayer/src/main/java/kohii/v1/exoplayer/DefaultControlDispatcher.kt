@@ -17,6 +17,7 @@
 package kohii.v1.exoplayer
 
 import com.google.android.exoplayer2.ControlDispatcher
+import com.google.android.exoplayer2.PlaybackParameters
 import com.google.android.exoplayer2.Player
 import kohii.v1.core.Playback
 
@@ -31,11 +32,31 @@ internal class DefaultControlDispatcher(private val playback: Playback) : Contro
     return true
   }
 
+  override fun dispatchPrevious(player: Player): Boolean {
+    return true
+  }
+
+  override fun dispatchNext(player: Player): Boolean {
+   return true
+  }
+
+  override fun dispatchRewind(player: Player): Boolean {
+    return true
+  }
+
+  override fun dispatchFastForward(player: Player): Boolean {
+   return true
+  }
+
   override fun dispatchSetShuffleModeEnabled(
     player: Player,
     shuffleModeEnabled: Boolean
   ): Boolean {
     player.shuffleModeEnabled = shuffleModeEnabled
+    return true
+  }
+
+  override fun dispatchPrepare(player: Player): Boolean {
     return true
   }
 
@@ -67,5 +88,20 @@ internal class DefaultControlDispatcher(private val playback: Playback) : Contro
     if (playable != null) playback.manager.pause(playable)
     player.stop(reset)
     return true
+  }
+
+  override fun dispatchSetPlaybackParameters(
+    player: Player,
+    playbackParameters: PlaybackParameters
+  ): Boolean {
+    return true
+  }
+
+  override fun isRewindEnabled(): Boolean {
+   return false
+  }
+
+  override fun isFastForwardEnabled(): Boolean {
+    return false
   }
 }

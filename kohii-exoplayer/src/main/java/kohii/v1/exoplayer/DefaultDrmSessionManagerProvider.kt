@@ -40,9 +40,9 @@ class DefaultDrmSessionManagerProvider(
   private val httpDataSourceFactory: HttpDataSource.Factory
 ) : DrmSessionManagerProvider {
 
-  override fun provideDrmSessionManager(media: Media): DrmSessionManager<ExoMediaCrypto>? {
+  override fun provideDrmSessionManager(media: Media): DrmSessionManager? {
     val mediaDrm = media.mediaDrm ?: return null
-    var drmSessionManager: DrmSessionManager<ExoMediaCrypto>? = null
+    var drmSessionManager: DrmSessionManager? = null
     var errorStringId = R.string.error_drm_unknown
     var subString: String? = null
 
@@ -86,7 +86,7 @@ class DefaultDrmSessionManagerProvider(
     keyRequestProperties: Array<String>?,
     multiSession: Boolean,
     httpDataSourceFactory: HttpDataSource.Factory
-  ): DrmSessionManager<ExoMediaCrypto> {
+  ): DrmSessionManager {
     val drmCallback = HttpMediaDrmCallback(licenseUrl, httpDataSourceFactory)
     if (keyRequestProperties != null) {
       var i = 0

@@ -25,6 +25,7 @@ import com.google.android.exoplayer2.mediacodec.MediaCodecSelector
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector.Parameters
+import com.google.android.exoplayer2.trackselection.ExoTrackSelection
 import com.google.android.exoplayer2.trackselection.TrackSelection
 import com.google.android.exoplayer2.upstream.BandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultAllocator
@@ -44,7 +45,7 @@ data class ExoPlayerConfig(
   internal val clock: Clock = Clock.DEFAULT,
     // DefaultTrackSelector parameters
   internal val trackSelectorParameters: Parameters = Parameters.DEFAULT_WITHOUT_CONTEXT,
-  internal val trackSelectionFactory: TrackSelection.Factory = AdaptiveTrackSelection.Factory(),
+  internal val trackSelectionFactory: ExoTrackSelection.Factory = AdaptiveTrackSelection.Factory(),
     // DefaultBandwidthMeter parameters
   internal val overrideInitialBitrateEstimate: Long = -1,
   internal val resetOnNetworkTypeChange: Boolean = true,
@@ -143,7 +144,6 @@ fun ExoPlayerConfig.createDefaultPlayerPool(context: Context) = ExoPlayerPool(
         .setAllowedVideoJoiningTimeMs(allowedVideoJoiningTimeMs)
         .setExtensionRendererMode(extensionRendererMode)
         .setMediaCodecSelector(mediaCodecSelector)
-        .setPlayClearSamplesWithoutKeys(playClearSamplesWithoutKeys)
 )
 
 // For internal use only.

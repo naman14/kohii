@@ -19,8 +19,8 @@ package kohii
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 object Versions {
   const val exoPlayerSnapShot = "dev-v2-SNAPSHOT"
-  const val exoPlayer = "2.11.8"
-  const val exoPlayerCode = 2011008
+  const val exoPlayer = "2.13.2"
+  const val exoPlayerCode = 2013002
 }
 
 object ReleaseInfo {

@@ -126,7 +126,6 @@ class DevScrollViewFragment : BaseFragment(), OnSelectionListener {
         }
       }
     } else {
-      binding.controlView.setControlDispatcher(null)
       binding.controlView.player = null
       binding.controlView.hide()
     }

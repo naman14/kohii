@@ -25,9 +25,11 @@ import com.google.android.exoplayer2.LoadControl
 import com.google.android.exoplayer2.RenderersFactory
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.analytics.AnalyticsCollector
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.BandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Clock
 import com.google.android.exoplayer2.util.Util
 import kohii.v1.core.DefaultTrackSelectorHolder
@@ -54,14 +56,16 @@ open class KohiiExoPlayer(
   loadControl: LoadControl = DefaultLoadControl.Builder().createDefaultLoadControl(),
   bandwidthMeter: BandwidthMeter =
     DefaultBandwidthMeter.Builder(context.applicationContext).build(),
-  looper: Looper = Util.getLooper()
+  looper: Looper = Util.getCurrentOrMainLooper()
 ) : SimpleExoPlayer(
     context,
     renderersFactory,
     trackSelector,
+    ProgressiveMediaSource.Factory(DefaultDataSourceFactory(context.applicationContext)),
     loadControl,
     bandwidthMeter,
     AnalyticsCollector(clock),
+    false,
     clock,
     looper
 ), VolumeInfoController, DefaultTrackSelectorHolder {

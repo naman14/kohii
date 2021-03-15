@@ -19,6 +19,7 @@ package kohii.v1.exoplayer
 import android.content.Context
 import android.net.Uri
 import com.google.android.exoplayer2.C
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.drm.DrmSessionManager
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.MediaSourceFactory
@@ -30,6 +31,8 @@ import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.upstream.HttpDataSource
+import com.google.android.exoplayer2.upstream.HttpDataSource.Factory
+import com.google.android.exoplayer2.upstream.LoadErrorHandlingPolicy
 import com.google.android.exoplayer2.upstream.cache.Cache
 import com.google.android.exoplayer2.upstream.cache.CacheDataSource
 import com.google.android.exoplayer2.upstream.cache.CacheDataSourceFactory
@@ -78,12 +81,31 @@ class DefaultMediaSourceFactoryProvider @JvmOverloads constructor(
           return intArrayOf(type)
         }
 
-        override fun createMediaSource(uri: Uri?): MediaSource {
+        override fun createMediaSource(uri: Uri): MediaSource {
           return media.mediaSource
         }
 
-        override fun setDrmSessionManager(drmSessionManager: DrmSessionManager<*>?): MediaSourceFactory {
+        override fun createMediaSource(mediaItem: MediaItem): MediaSource {
+          return media.mediaSource
+        }
+
+        override fun setDrmSessionManagerProvider(drmSessionManagerProvider: com.google.android.exoplayer2.drm.DrmSessionManagerProvider?): MediaSourceFactory {
           return this
+        }
+        override fun setDrmSessionManager(drmSessionManager: DrmSessionManager?): MediaSourceFactory {
+          return this
+        }
+
+        override fun setDrmHttpDataSourceFactory(drmHttpDataSourceFactory: Factory?): MediaSourceFactory {
+          TODO("Not yet implemented")
+        }
+
+        override fun setDrmUserAgent(userAgent: String?): MediaSourceFactory {
+          TODO("Not yet implemented")
+        }
+
+        override fun setLoadErrorHandlingPolicy(loadErrorHandlingPolicy: LoadErrorHandlingPolicy?): MediaSourceFactory {
+          TODO("Not yet implemented")
         }
       }
     }

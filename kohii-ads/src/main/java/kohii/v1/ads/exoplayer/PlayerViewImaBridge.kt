@@ -28,6 +28,7 @@ import com.google.android.exoplayer2.source.MediaSourceFactory
 import com.google.android.exoplayer2.source.ads.AdsLoader
 import com.google.android.exoplayer2.source.ads.AdsMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.upstream.DataSpec
 import kohii.v1.ads.AdMedia
 import kohii.v1.core.PlayerPool
 import kohii.v1.exoplayer.MediaSourceFactoryProvider
@@ -56,7 +57,7 @@ class PlayerViewImaBridge(
 
   // Using Application Context so this View instance can survive configuration changes.
   private val adViewGroup: ViewGroup = FrameLayout(context.applicationContext)
-  private val adDisplayContainer: AdDisplayContainer = adsLoader.adDisplayContainer
+  private val adDisplayContainer: AdDisplayContainer? = adsLoader.adDisplayContainer
 
   override var renderer: PlayerView?
     get() = super.renderer
@@ -64,21 +65,22 @@ class PlayerViewImaBridge(
       super.renderer?.let { current ->
         current.adViewGroup.removeView(adViewGroup)
         @Suppress("DEPRECATION")
-        adDisplayContainer.unregisterAllVideoControlsOverlays()
-        adDisplayContainer.unregisterAllFriendlyObstructions()
+        adDisplayContainer?.unregisterAllVideoControlsOverlays()
+        adDisplayContainer?.unregisterAllFriendlyObstructions()
       }
       super.renderer = value
       if (value != null) {
         value.adViewGroup.addView(adViewGroup)
         value.adOverlayViews.forEach {
           @Suppress("DEPRECATION")
-          adDisplayContainer.registerVideoControlsOverlay(it)
+          adDisplayContainer?.registerVideoControlsOverlay(it)
         }
       }
     }
 
   override fun createMediaSource(): MediaSource = AdsMediaSource(
       mediaSourceFactory.createMediaSource(media.uri),
+      DataSpec(media.uri), "adsId",
       adsMediaSourceFactory,
       adsLoader,
       this

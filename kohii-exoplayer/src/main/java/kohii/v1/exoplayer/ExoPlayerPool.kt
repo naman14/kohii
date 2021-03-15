@@ -51,7 +51,7 @@ class ExoPlayerPool(
       trackSelectorFactory.createDefaultTrackSelector(context.applicationContext),
       loadControlFactory.createLoadControl(),
       bandwidthMeterFactory.createBandwidthMeter(context.applicationContext),
-      Util.getLooper()
+      Util.getCurrentOrMainLooper()
   )
 
   override fun resetPlayer(player: Player) {

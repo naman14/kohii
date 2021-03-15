@@ -144,8 +144,8 @@ class PlayerEventListeners : CopyOnWriteArraySet<PlayerEventListener>(),
     this.forEach { it.onVolumeChanged(volume) }
   }
 
-  override fun onAudioSessionId(audioSessionId: Int) {
-    this.forEach { it.onAudioSessionId(audioSessionId) }
+  override fun onAudioSessionIdChanged(audioSessionId: Int) {
+    this.forEach { it.onAudioSessionIdChanged(audioSessionId) }
   }
 }
 

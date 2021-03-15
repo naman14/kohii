@@ -135,7 +135,6 @@ fun createKohii(context: Context, config: ExoPlayerConfig): Kohii {
             .setAllowedVideoJoiningTimeMs(config.allowedVideoJoiningTimeMs)
             .setExtensionRendererMode(config.extensionRendererMode)
             .setMediaCodecSelector(config.mediaCodecSelector)
-            .setPlayClearSamplesWithoutKeys(config.playClearSamplesWithoutKeys)
     )
     val mediaCache: Cache = config.cache ?: lruCacheSingleton.get(context)
     val drmSessionManagerProvider =

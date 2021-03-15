@@ -56,7 +56,7 @@ class PlayerViewImaBridgeCreator(
     return if (adTagUri != null) {
       val adsLoaderBuilder = imaAdsLoaderBuilder ?: ImaAdsLoader.Builder(context)
           .setAdEventListener(Manilo[context])
-      val adsLoader = adsLoaderBuilder.buildForAdTag(adTagUri)
+      val adsLoader = adsLoaderBuilder.build()
       PlayerViewImaBridge(
           context,
           media,

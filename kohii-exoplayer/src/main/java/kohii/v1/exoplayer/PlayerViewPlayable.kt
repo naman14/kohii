@@ -45,7 +45,6 @@ class PlayerViewPlayable(
         renderer.setControlDispatcher(controller)
         renderer.useController = true
       } else {
-        renderer.setControlDispatcher(null)
         renderer.useController = false
       }
     }
@@ -59,7 +58,6 @@ class PlayerViewPlayable(
 
   override fun onRendererDetached(playback: Playback, renderer: Any?) {
     if (renderer is PlayerView) {
-      renderer.setControlDispatcher(null)
       renderer.useController = false
     }
     super.onRendererDetached(playback, renderer)
